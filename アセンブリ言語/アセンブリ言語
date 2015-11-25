@@ -1,0 +1,10 @@
+	.text
+.globl _add5
+_add5:
+	pubshl %ebp
+	movl %esp, %ebp
+	subl $8, %esp
+	mobl 8(%ebp), %eax
+	addl $5, %eax
+	leave
+	ret

@@ -1,0 +1,238 @@
+			チートシート
+	定数の宣言方法
+final 型 定数名 = 初期値;
+	
+	リテラルの表記方法
+int a = 30;
+long a = 300000L;
+float a = 30.5F
+
+	キャスト演算子
+int a = (int) 3.2;
+	
+	大きい方の数字を代入する命令
+int m = Math.max(a, b);
+
+	String型をint型に変換する命令
+int n = Integer.parseint( a );
+
+	乱数を生成する命令 (0 <= r < a)
+int r = new java.util.Random().nextInt(a);
+
+	キーボードから入力を受け付ける命令
+String input = new java.util.Scanner (System.in).nextLine ();
+int input = new java.util.Scanner (System.in).newtInt ();
+
+	String型の比較
+変数名.equals ("文字列")
+
+	論理演算子
+&&:かつ、　||:または
+
+	switch文
+switch(変数名){
+	case 値1: 処理１ break;
+	・・・・・
+	default: 処理x
+}
+
+	配列の作成
+要素型 [] 配列変数名 = new int [要素数];
+
+	配列の要素数の取得
+配列変数名.length
+
+	拡張for文(配列の要素を１つずつ取り出すループ)
+for(要素の型　任意の変数名 : 配列変数名){
+}
+
+	コマンドライン引数　(配列String[] argsに格納)
+(実行時に)　java プログラム名 引数リスト(半角スペース区切り)
+
+	package文
+package 所属させたいパッケージ名;			(package文はソースコードの先頭に記述する)
+
+	完全限定クラス名(FQCN)
+パッケージ名.クラス名
+
+	import文
+import パッケージ名.クラス名;
+
+	クラスローダーの動作原則
+あるパッケージx.y.zに属するクラスCを探すときクラスローダーは「クラスパスで指定されたフォルダ\x\y\z\C.class」というファイルを読み込もうとする
+
+	コンストラクタ内での別コンストラクタの呼び出し
+this(引数);　と記述する　(this.クラス名(引数);と書くのは間違い！)
+
+	静的メンバ
+フィールド宣言の先頭にstaticを追加　＞　静的フィールド
+１．フィールド変数の実体がクラスに準備される　クラス名.静的フィールド名でアクセス　ex）Hero.moneyでアクセスできる
+２．全インスタンスに箱の分身が準備される　クラス名.静的フィールド名でもアクセス可　ex）h1.moneyやh2.moneyでもHero.moneyと同じ変数にアクセスできる
+３．インスタンスを１つも生み出さなくても箱が利用可能になる
+メソッドの前に追加　＞　静的メソッド
+静的フィールドと同様に「クラス名.メソッド名();」や「インスタンス変数名.メソッド名();」で呼び出せ、インスタンスを作らなくとも呼び出せる
+重要！！…静的メソッド内ではstaticがついてないフィールドやメソッドは利用できない！！
+
+	フィールド・メソッドのアクセス制御
+アクセス修飾子をフィールド・メソッド宣言の先頭につける
+private　自分自身のクラスのみ
+package private　自分と同じパッケージに属するクラス　（何も書かなければ自動的にpackage privateとなる）
+protected　自分と同じパッケージに属するか、自分を継承した子クラス
+public　すべてのクラス
+フィールドはすべてprivate、メソッドはすべてpublicが定石　読み書きはgetter(getフィールド名)・setter(setフィールド名)メソッドで行う
+
+	クラスに対するアクセス制御
+package private　自分と同じパッケージに属するクラス　（何も書かなければ自動的にpackage privateとなる）
+public　すべてのクラス
+　非publicクラスでは、
+１．クラスの名前はソースファイル名と異なってもよい
+２．１つのソースファイルに複数宣言してもよい
+
+	　継承
+	継承を用いたクラスの定義式
+class クラス名 extends 元となるクラス名 {親との差分メンバ}
+クラス宣言時にfinalを付けることでそのクラスは継承ができなくなる
+メソッド宣言時にfinalを付けることでそのメソッドのオーバーライドができなくなる
+	親インスタンス部のメンバの利用
+super.フィールド名またはメソッド名(引数)		（祖父母インスタンスへの直接のアクセスは不可能！）
+	親クラスのコンストラクタの呼び出し
+super(引数);	（すべてのコンストラクタは、その先頭で親クラスのコンストラクタを呼び出す）
+
+		抽象クラス
+	詳細未定メソッド(抽象メソッド)の宣言
+アクセス修飾子 abstract 戻り値 メソッド名 (引数リスト);
+	１つでも抽象メソッドを含むクラスの宣言
+アクセス修飾子 abstract class クラス名{  }
+これによりnewによるインスタンス化が禁止される
+
+		インタフェース
+・インタフェース内で宣言されたメソッドは自動的にpublic abstractが補われる
+・インタフェース内でのフィールドは自動的にpublic static finalが補われ定数を宣言したことになる
+・例外的に多重継承が許されている
+	インタフェースとして扱うための条件
+１．すべてのメソッドは抽象メソッドである
+２．基本的にフィールドを1つも持たない
+	インタフェースの宣言
+アクセス修飾子 interface インタフェース名{  }
+	インタフェースの実装
+アクセス修飾子 class クラス名 implements インタフェース名1, インタフェース名2…{  }　（インタフェース同士の継承ではextendsを使う）
+
+		多様性
+	instanceof 演算子
+変数 instanceof 型名　　（変数を型名の箱に代入可能ならばtrueが返る）
+	多様性のメリット
+１．同一視することで同じインスタンスを継承したインスタンスを一つの配列にまとめることができる
+２．同一のクラスを継承したクラスを引数として使うことができる　ex）Monster mが引数のメソッドにSmile sやGblin gを引数として使える
+
+		日付を扱う
+-	Dateインスタンスの生成	java.util.Date　（long型なので人間には扱いにくい）
+Date d = new Date (); //現在日時を持つインスタンス生成
+Date d = new Date (long値); //long値の日時を持つインスタンス生成
+-	Calendarクラス	java.util.Calendar
+	6つのint値からDateインスタンスを生成
+Calendar c = Calendar.getInstance();
+c.set(年, 月, 日, 時, 分, 秒);　または　c.set(Calendar. ~ , 値);		[~の内部はYEAR, MONTH, DAY_OF_MONTH, HOUR, MINUTE, DAYを指定可]
+Date d = c.getTime();
+	Dateインスタンスから6つのint値を生成
+Calendar c = Calendar.getInstance();
+c.setTime(d); //dはDate型変数
+int 変数 =c.get(Calendar.~);
+-	SimpleDateFormatクラスの利用		java.text.SimpleDateFormat
+	DateからStringを生成する構文
+SimpleDateFormat f = new SimpleDateFormat(書式文字列); [書式文字列y,M,d,E(曜日),a/p(午前/午後),H(時0~23),K(0~12),m,s]
+String s = f.format (d); //dはDate型関数
+	StringからDateを生成する構文
+Date d = f.parse(文字列);
+		java.timeパッケージ
+Instant：エポックからの経過秒数をナノ秒で格納（Dateと似た役割）
+ZonedDateTime：基準となる場所（タイムゾーン）・都市・月・日・時・分・秒・ナノ秒を格納（Calendarクラスと似た役割）
+LocalDateTime：ZonedDateTimeからタイムゾーン情報を削ったもの　あいまいな時間を扱う
+Duration
+Period
+
+	Object型の変数
+toString()メソッド　利用する際はオーバーライドして表示形式を定義する
+equals()メソッド　等価判定を行うが、デフォルトではただの等値判定(==と同じ)を行うためオーバーライドして判定方法を指定する
+
+		例外
+Error系例外　try-catch文でキャッチする必要はない
+Exception系例外　　try-catch文でキャッチしないとコンパイルエラー
+RuntimeException系例外　　try-catch文でキャッチするかは任意
+既存の例外クラスを継承してオリジナルの例外クラスを作ることもできる
+	try-catch文
+try{通常実行される文}catch(例外クラス名 変数名){例外発生時に実行される文}finally{必ず実行する処理}
+または、try(ここで代入されたものは自動的にclose()される){以下同じ}catch(　){　}
+（|で区切ることで一つのcatchブロックで複数種類の例外をキャッチできる）
+String e.getMessage()でエラーメッセージを取得
+void printStackTrace()でスタックトレースの内容を画面に出力する
+	スロー宣言　（意図的に発生する例外を呼び出し元へ伝播させる）
+アクセス就職 戻り値 メソッド名 (引数リスト)throws 例外クラス１, 例外クラス２,… {   }
+	例外を投げる
+throw 例外インスタンス; //一般的には「throw new 例外クラス名("エラーメッセージ");」となる
+
+		正規表現
+1.通常の文字：その文字でなければならない　ex）String s = "Java"; s.matches("Java") //=> true 	s.matches("java"); //=>false
+2.ピリオド：任意の1文字であればよい　ex）"Java".matches("J.va") // =>true
+3.アスタリスク：直前の文字の0回以上の繰り返し　ex）"Jaaaaava".matches("Ja*va") //=> true		"あいうx01".matches(".*") // => true
+4.波括弧：指定回数の繰り返し
+	{n} ：直前の文字のn回の繰り返し
+	{n,}　：直前の文字のn回以上の繰り返し
+	{j,m}　：直前の文字のn回以上m回以下の繰り返し
+	?　：直前の文字の0回または1回の繰り返し
+	+　：直前の文字の1回以上の繰り返し
+5.角カッコ：いずれかの文字　ex）UR[LIN] は「1文字目がU、2文字目がR、3文字目がLかIかNであること」
+6.角カッコ内のハイフン：指定範囲のいずれかの文字：　ex）"url".matches("[a-z]{3}") //=>true
+	\d：いずれかの数字 （＝[0-9]）
+	\w：英字・数字・アンダーバー　（=[a-zA-Z_0-9]）
+	\s：空白文字（スペース、タブ文字、改行文字など）
+7.ハットとダラー：先頭と末尾　ex）^j.*p$は「先頭母児がjで、最後の文字がpの任意の長さの文字列」　matches()ではいらないがsplit()やreplaceAll()で使うことがある
+	matchs()メソッド：文字列照合
+	split()メソッド：文字列の分割
+	replaceAll()：文字列の置換
+	
+		書式指定文字列
+	%修飾桁型
+修飾（省略可）：,　：3桁ごとにカンマを入れる
+						0	：空き領域を0埋め
+						-　：左寄せ（数字）
+						+：符号を強制表示
+桁（省略可）：表示桁数を指定するn.m形式で指定した場合、全体n桁、小数点以下m桁での表示となる
+型（必須）：d　：整数
+				  s　：文字列
+				  f　：小数
+				  b　：真偽値
+format(書式文字列, パラメータ…)		成形した文字列を組み立てる
+System.out.printf(書式文字列, パラメータ…)		成形した文字列を表示する
+
+		その他メソッド
+	Stringクラス
+public boolean equals(Object o)　　内容が等しいか調べる
+public boolean equalsIgnoreCase(String s)　　大文字、小文字を区別せず内容が等しいか調べる
+public int length()　　文字列長を調べる
+public boolean isEmpty()　　空文字かを調べる
+public boolean contains(String s)		一部に文字列sを含むかを調べる
+public boolean startsWith(String s)		文字列sで始まるかを調べる
+public boolean endsWith(String s)		文字列sで終わるかを調べる
+public int indexOf(int ch {or String str})		文字ch{または文字列str}が最初に登場する位置を調べる
+public int lastIndexOf(int ch {String str})		文字ch{または文字列str}を後ろから検索して最初に登場する位置を調べる
+public char charAt(int index)		指定位置の1文字を切り出す
+public String substring(int index)
+public String substring(int index, int endIndex) 指定位置から始まる文字列を任意の長さだけ切り出す
+public String toLowerCase()		大文字を小文字に変換する
+public String toUpperCase()		小文字を大文字に変換する
+public String trim()		前後の空白を除去する（ただし全角スペースは除去されない）
+public String replace(String before, String after)		文字列を置き換える
+
+	StringBuilderクラス		文字列の連結		使えない場合はStringBufferクラスを用いる
+StringBuilder sb = new StringBuilder();		StringBuilderクラスで宣言
+sb.append("文字列");		append()メソッドを読んでバッファに文字列を追加していく
+String s = sb.toString();		toString()を呼び、完成した連結済みの文字列を取り出す
+sb.append("hello").append("java").append("world");		メソッドチェーンと呼ばれる自身への参照を返すメソッドを連続して呼び出す手法が可能
+	Integerクラス
+parseInt()		数字の文字列をint型に変換
+toHexString()	整数を16進数表現に変換する
+	ファイルの読み書き
+FileReader 変数名 = new FileReader (ファイル名String型);     [java.io.FileReader]
+変数名.read()
+変数名.write()
+変数名.close()　　必ずファイルは最後に閉じること！！

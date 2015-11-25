@@ -1,0 +1,14 @@
+import java.util.*;
+
+public class Main3_8{
+	public static void main(String[] args){
+		Map<String, Integer> prefs = new HashMap<>();
+		prefs.put("‹“s•{", 255);
+		prefs.put("“Œ‹“s", 1261);
+		prefs.put("ŒF–{Œ§", 182);
+		for(String key : prefs.keySet()){
+			int value = prefs.get(key);
+			System.out.println(key + "‚ÌlŒû‚ÍA" + value);
+		}
+	}
+}
